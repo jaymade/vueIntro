@@ -26,9 +26,11 @@
                 <p v-else-if='inventory<=10 && inventory > 0'>Almost out</p>
                 <p v-else>out of stock</p>
 
+                <!-- details -->
                 <ul>
                     <li v-for="detail in details">{{ detail }}</li>
                 </ul>
+                <!-- colors -->
                 <div v-for="variant in variants"
                     :key="variant.vid"
                     class="color-box"
@@ -36,8 +38,13 @@
                     @mouseover='updateProduct(variant.vImage)'>
                    
                 </div>
-                <button v-on:click="addToCart">Add to Cart</button>
-                <button @click="removeFromCart">Remove from Cart</button>
+                <!-- buttons -->
+                <button v-on:click="addToCart" :disabled="inventory == 0"
+                 :class="{disabledButton: inventory == 0 }">Add to Cart</button>
+                <button @click="removeFromCart" :disabled="inventory == 0"
+                :class="{disabledButton: inventory == 0 }">Remove from Cart</button>
+
+                <!-- cart -->
                 <div class="cart">
                     <p>Cart({{cart}})</p>
                 </div>
